@@ -87,6 +87,8 @@ public class PassportService {
     public void deletePassport(Long id){
         log.warn("Deleting a passport with id "+id);
         Passport passport = checkPassport(id);
+        Student student = passport.getStudent();
+        student.setPassport(null);
         passportRepository.delete(passport);
         log.info("Passport deleted Successfully with id "+id);
     }
@@ -95,7 +97,10 @@ public class PassportService {
     void invalidPassport() throws InterruptedException{
         List<Passport> passports = (List<Passport>) passportRepository.findAll();
         passports.stream().map(passport -> {
-            if (passport.getDateOfExpiry().getYear() - new Date().getYear() == 0){
+            Date d = new Date();
+            int difference = passport.getDateOfExpiry().getYear() - (d.getYear()+1900);
+            log.info("Difference found "+difference);
+            if ( difference == 0){
                 mailService.sendMail(passport.getStudent().getEmail(),"Your update your passport","Your passport date has been finished please update your passport details");
             }
             return 0;

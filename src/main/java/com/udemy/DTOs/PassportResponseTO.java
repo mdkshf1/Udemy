@@ -3,12 +3,9 @@ package com.udemy.DTOs;
 import com.udemy.entities.Passport;
 import com.udemy.entities.Student;
 import lombok.Data;
-
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import java.security.PublicKey;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 public class PassportResponseTO {

@@ -33,7 +33,7 @@ public class Passport extends AuditingInfo{
     @NotBlank(message = "Date of Expiry cannot be left blank")*/
     @Column(nullable = false)
     private LocalDate dateOfExpiry;
-    @OneToOne(mappedBy = "passport",cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "passport")
     private Student student;
 
     public static Passport mapper(PassportRequestTO request,Student student){
